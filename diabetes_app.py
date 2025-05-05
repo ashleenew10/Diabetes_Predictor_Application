@@ -5,8 +5,7 @@ import pickle
 # File paths
 model_files = {
     "XGBoost": "diabetes_xgboost_model.pkl",
-    "Logistic Regression": "diabetes_logistic_model.pkl",
-    "Random Forest": "diabetes_random_forest_model.pkl"
+    "Logistic Regression": "diabetes_logistic_model.pkl"
 }
 
 # Load scaler
