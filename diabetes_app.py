@@ -6,7 +6,7 @@ import pickle
 with open("diabetes_logistic_model.pkl", "rb") as f:
     model = pickle.load(f)
 
-with open("scaler.pkl", "rb") as f:
+with open("lr_scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 # --- Streamlit Config ---
