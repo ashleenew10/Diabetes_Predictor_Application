@@ -19,7 +19,9 @@ st.title("Diabetes Risk Predictor")
 # --- Model Selector ---
 st.markdown("### Choose your model")
 model_choice = st.selectbox("Select a prediction model:", list(model_files.keys()))
-model = pickle.load(open(model_files[model_choice], "rb"))
+with open(model_files[model_choice], "rb") as f:
+    model = pickle.load(f)
+
 
 # --- Inputs ---
 st.markdown("### Provide your health information")
