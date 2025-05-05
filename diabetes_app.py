@@ -97,7 +97,7 @@ if st.button("Check My Diabetes Risk"):
     }).sort_values(by="Impact", key=abs, ascending=True)
 
     fig, ax = plt.subplots()
-    ax.barh(contribution_df["Feature"], contribution_df["Impact"], color="skyblue")
+    ax.barh(contribution_df["Feature"], contribution_df["Impact"], color="limegreen")
     ax.axvline(0, color='black', linewidth=0.8)
     ax.set_xlabel("Contribution to Risk (log-odds)")
     st.pyplot(fig)
