@@ -2,26 +2,20 @@ import streamlit as st
 import numpy as np
 import pickle
 
-# File paths
-model_files = {
-    "XGBoost": "diabetes_xgboost_model.pkl",
-    "Logistic Regression": "diabetes_logistic_model.pkl"
-}
+# File path for logistic regression model
+model_file = "diabetes_logistic_model.pkl"
 
 # Load scaler
 with open("scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
+# Load logistic regression model
+with open(model_file, "rb") as f:
+    model = pickle.load(f)
+
 # --- Streamlit Config ---
 st.set_page_config(page_title="Diabetes Risk Predictor", layout="centered")
 st.title("Diabetes Risk Predictor")
-
-# --- Model Selector ---
-st.markdown("### Choose your model")
-model_choice = st.selectbox("Select a prediction model:", list(model_files.keys()))
-with open(model_files[model_choice], "rb") as f:
-    model = pickle.load(f)
-
 
 # --- Inputs ---
 st.markdown("### Provide your health information")
@@ -92,4 +86,3 @@ if st.button("Check My Diabetes Risk"):
         st.error(f"⚠️ You may be at risk for diabetes. Estimated risk: **{prob:.2%}**")
     else:
         st.success(f"You are not currently predicted to be at risk. Estimated risk: **{prob:.2%}**")
-
