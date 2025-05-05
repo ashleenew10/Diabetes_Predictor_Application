@@ -1,6 +1,8 @@
 import streamlit as st
 import numpy as np
 import pickle
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Load logistic regression model and scaler
 with open("diabetes_logistic_model.pkl", "rb") as f:
@@ -77,3 +79,25 @@ if st.button("Check My Diabetes Risk"):
         st.error(f"⚠️ You may be at risk for diabetes. Estimated risk: **{prob:.2%}**")
     else:
         st.success(f"You are not currently predicted to be at risk. Estimated risk: **{prob:.2%}**")
+
+    # --- Visualize Feature Impact ---
+    st.markdown("### 🔍 What influenced your result?")
+
+    feature_names = [
+        "HighBP", "HighChol", "CholCheck", "BMI", "Stroke",
+        "HeartDiseaseorAttack", "PhysActivity", "HvyAlcoholConsump",
+        "GenHlth", "MentHlth", "PhysHlth", "DiffWalk", "Sex",
+        "Age", "Education", "Income"
+    ]
+
+    contributions = scaled_input[0] * model.coef_[0]
+    contribution_df = pd.DataFrame({
+        "Feature": feature_names,
+        "Impact": contributions
+    }).sort_values(by="Impact", key=abs, ascending=True)
+
+    fig, ax = plt.subplots()
+    ax.barh(contribution_df["Feature"], contribution_df["Impact"], color="skyblue")
+    ax.axvline(0, color='black', linewidth=0.8)
+    ax.set_xlabel("Contribution to Risk (log-odds)")
+    st.pyplot(fig)
