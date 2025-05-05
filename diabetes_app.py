@@ -81,7 +81,7 @@ if st.button("Check My Diabetes Risk"):
         st.success(f"You are not currently predicted to be at risk. Estimated risk: **{prob:.2%}**")
 
     # --- Visualize Feature Impact ---
-    st.markdown("### 🔍 What influenced your result?")
+    st.markdown("### What factors influenced your result?")
 
     feature_names = [
         "HighBP", "HighChol", "CholCheck", "BMI", "Stroke",
