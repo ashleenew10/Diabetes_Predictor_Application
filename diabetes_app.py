@@ -2,16 +2,12 @@ import streamlit as st
 import numpy as np
 import pickle
 
-# File path for logistic regression model
-model_file = "diabetes_logistic_model.pkl"
+# Load logistic regression model and scaler
+with open("diabetes_logistic_model.pkl", "rb") as f:
+    model = pickle.load(f)
 
-# Load scaler
 with open("scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
-
-# Load logistic regression model
-with open(model_file, "rb") as f:
-    model = pickle.load(f)
 
 # --- Streamlit Config ---
 st.set_page_config(page_title="Diabetes Risk Predictor", layout="centered")
@@ -38,15 +34,10 @@ if use_bmi_calc:
 else:
     BMI = st.number_input("BMI", 10.0, 60.0, 25.0)
 
-Smoker = yes_no("Have you smoked over 100 cigarettes in your life?")
 Stroke = yes_no("History of Stroke?")
 HeartDiseaseorAttack = yes_no("History of Heart Disease or Heart Attack?")
 PhysActivity = yes_no("Physical Activity in last 30 days?")
-Fruits = yes_no("Eat fruit daily?")
-Veggies = yes_no("Eat vegetables daily?")
 HvyAlcoholConsump = yes_no("Heavy alcohol consumption? (adult men having > 14 drinks & adult women having > 7 drinks per week)")
-AnyHealthcare = yes_no("Do you have any health coverage (including health insurance, prepaid plans such as HMO, etc.)?")
-NoDocbcCost = yes_no("Has there been a time in the last 12 months where you couldn't see doctor due to cost?")
 GenHlth = st.slider("General Health (1=Excellent, 5=Poor)", 1, 5, 3)
 MentHlth = st.slider("Poor mental health days in the last month (0-30)", 0, 30, 0)
 PhysHlth = st.slider("Poor physical health days in the last month (0-30)", 0, 30, 0)
@@ -72,10 +63,10 @@ income_map = {
 Income = income_map[st.selectbox("Annual Income", list(income_map.keys()))]
 
 # --- Predict ---
-input_data = np.array([[HighBP, HighChol, CholCheck, BMI, Smoker, Stroke,
-                        HeartDiseaseorAttack, PhysActivity, Fruits, Veggies,
-                        HvyAlcoholConsump, AnyHealthcare, NoDocbcCost, GenHlth,
-                        MentHlth, PhysHlth, DiffWalk, Sex, Age, Education, Income]])
+input_data = np.array([[HighBP, HighChol, CholCheck, BMI, Stroke,
+                        HeartDiseaseorAttack, PhysActivity, HvyAlcoholConsump,
+                        GenHlth, MentHlth, PhysHlth, DiffWalk, Sex,
+                        Age, Education, Income]])
 scaled_input = scaler.transform(input_data)
 
 if st.button("Check My Diabetes Risk"):
