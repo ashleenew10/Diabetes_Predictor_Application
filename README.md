@@ -1,5 +1,8 @@
 # Diabetes Risk Prediction App
 
+## See our final app at this link (may be sleeping)
+https://ml-final-diabetespredictorapp.streamlit.app/
+
 A Streamlit-powered machine learning application that enables individuals to assess their personal risk for type II diabetes based on self-reported health data. Built with a mission to promote early intervention on the patient side, this tool combines accessible design with predictive analytics to empower users with health insights—supporting preventative care and healthcare equity.
 
 ## Overview
