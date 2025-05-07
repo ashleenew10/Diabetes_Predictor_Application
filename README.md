@@ -21,7 +21,7 @@ Diabetes is one of the most prevalent chronic conditions in the United States, a
 ├── app.py                     # Main Streamlit app
 ├── diabetes_logistic_model.pkl
 ├── diabetes_xgboost_model.pkl
-├── diabetes_random_forest_model.pkl
+├── diabetes_random_forest_model.pkl #NOTE: you will need to retrain the RF model and build your own .pkl file (our file was too large)
 ├── scaler.pkl                 # Scaler used for Random Forest/XGBoost
 ├── lr_scaler.pkl              # Scaler used for Logistic Regression
 ├── requirements.txt
